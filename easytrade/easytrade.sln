@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Api", "easytrade.api\Easytrade.Api.csproj", "{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Domain", "easytrade.domain\Easytrade.Domain.csproj", "{B2C96891-6B5F-4529-B807-F2457653A4D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Model", "easytrade.Model\Easytrade.Model.csproj", "{8614D9E5-1347-4496-A518-1A02A4532058}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Logic", "Easytrade.Logic\Easytrade.Logic.csproj", "{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiClients", "ApiClients", "{D9E490A1-CC47-4E53-A3EA-72715B7F27B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easytrade.Contract", "Easytrade.Contract\Easytrade.Contract.csproj", "{9CA8086E-8C5C-493A-9C37-8BA0DB000E06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8614D9E5-1347-4496-A518-1A02A4532058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8614D9E5-1347-4496-A518-1A02A4532058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8614D9E5-1347-4496-A518-1A02A4532058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8614D9E5-1347-4496-A518-1A02A4532058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CA8086E-8C5C-493A-9C37-8BA0DB000E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA8086E-8C5C-493A-9C37-8BA0DB000E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CA8086E-8C5C-493A-9C37-8BA0DB000E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CA8086E-8C5C-493A-9C37-8BA0DB000E06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CFCF179-6B4E-4D88-A72B-9501DC8626F9}
+	EndGlobalSection
+EndGlobal
