@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5ea8e3ab-5fdc-40ef-9c97-df5a0fb68699</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Easytrade.Api.Binance.Logic\Easytrade.Api.Binance.Logic.csproj" />
     <ProjectReference Include="..\Easytrade.Contract\Easytrade.Contract.csproj" />
     <ProjectReference Include="..\Easytrade.Logic\Easytrade.Logic.csproj" />
   </ItemGroup>

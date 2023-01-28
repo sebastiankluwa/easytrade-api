@@ -1,3 +1,7 @@
+using Easytrade.Api.Binance.Logic;
+using Easytrade.Api.Binance.Logic.Extensions;
+using Easytrade.Api.Binance.Logic.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddBinanceServices(builder.Configuration);
+builder.Services.AddScoped<IBinanceRepository, BinanceRepository>();
+
 var app = builder.Build();
+
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
