@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+  db:
+    image: postgres:13-alpine
+    restart: always
+    container_name: easytrade-api_db
+    env_file:
+    - ./toolset/.env
+    ports:
+    - 5432:5432
+
+  easytrade:
+    image: easytrade
+    build: 
+      context: ./
+      dockerfile: Dockerfile  
+    depends_on: 
+    - db
+    ports:
+    - 5000:80
+    env_file:
+    - ./toolset/.env
+    entrypoint: dotnet Easytrade.Api.dll

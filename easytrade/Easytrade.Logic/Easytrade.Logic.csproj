@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Easytrade.Contract\Easytrade.Contract.csproj" />
-    <ProjectReference Include="..\easytrade.domain\Easytrade.Domain.csproj" />
     <ProjectReference Include="..\easytrade.Model\Easytrade.Model.csproj" />
   </ItemGroup>
 

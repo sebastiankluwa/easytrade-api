@@ -1,4 +1,4 @@
-﻿namespace Easytrade.Api.Controllers.Symbols
+﻿namespace Easytrade.Api.Controllers
 {
     using Easytrade.Api.Binance.Logic.Repositories;
     using Easytrade.Contract;

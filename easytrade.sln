@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Api", "easytrade\easytrade.api\Easytrade.Api.csproj", "{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Domain", "easytrade\easytrade.domain\Easytrade.Domain.csproj", "{B2C96891-6B5F-4529-B807-F2457653A4D3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Model", "easytrade\easytrade.Model\Easytrade.Model.csproj", "{8614D9E5-1347-4496-A518-1A02A4532058}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Logic", "easytrade\Easytrade.Logic\Easytrade.Logic.csproj", "{B2A75ECF-F8A7-40CB-8E16-E3B0517AFF8C}"
@@ -17,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TradingEngine", "TradingEng
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binance", "Binance", "{3E5E969F-AFB6-4C7A-AD36-941925360D20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easytrade.Api.Binance.Logic", "easytrade\Easytrade.Api.Binance.Logic\Easytrade.Api.Binance.Logic.csproj", "{04D2C9BE-4AEA-4D58-865F-F4E3A6E1C64F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Easytrade.Api.Binance.Logic", "easytrade\Easytrade.Api.Binance.Logic\Easytrade.Api.Binance.Logic.csproj", "{04D2C9BE-4AEA-4D58-865F-F4E3A6E1C64F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35153D16-AED1-4A96-8376-DDEF0F9B0EE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2C96891-6B5F-4529-B807-F2457653A4D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8614D9E5-1347-4496-A518-1A02A4532058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8614D9E5-1347-4496-A518-1A02A4532058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8614D9E5-1347-4496-A518-1A02A4532058}.Release|Any CPU.ActiveCfg = Release|Any CPU
