@@ -1,9 +1,17 @@
 ﻿namespace Easytrade.Contract
 {
-    public class ApiContractUrlsV1
+    public static class ApiContractUrlsV1
     {
         public const string Version = "v1";
 
-        public const string Symbols = Version + "/symbols";
+        public const string PublicApiVersion = "public/api/" + Version;
+
+        public const string InternalApiVersion = "api/" + Version;
+
+        public const string Symbols = InternalApiVersion + "/symbols";
+
+        public const string Bots = InternalApiVersion + "/bots";
+
+        public const string PublicOrders = PublicApiVersion + "/{botId}/orders";
     }
 }

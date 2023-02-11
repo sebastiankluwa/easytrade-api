@@ -1,13 +1,13 @@
-﻿namespace Easytrade.Logic.Repositories
+﻿namespace Easytrade.Model.Repositories
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Easytrade.Model.Domain.Bots;
 
     public interface IBotRepository
     {
-
+        Task<Bot> GetBotByIdAsync(long botId);
+        Task<Bot> CreateBotAsync(Bot bot);
+        Task DeleteBotByIdAsync(long botId);
+        Task<IEnumerable<Bot>> GetAllBotsAsync();
+        Task<Bot> UpdateBotAsync(Bot updatedBot);
     }
 }

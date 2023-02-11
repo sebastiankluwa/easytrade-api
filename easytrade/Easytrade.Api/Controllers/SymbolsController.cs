@@ -1,6 +1,6 @@
 ﻿namespace Easytrade.Api.Controllers
 {
-    using Easytrade.Api.Binance.Logic.Repositories;
+    using BinanceApi.Client;
     using Easytrade.Contract;
     using Easytrade.Contract.Responses;
     using Microsoft.AspNetCore.Mvc;
@@ -9,11 +9,11 @@
     [ApiController]
     public class SymbolsController : ControllerBase
     {
-        private readonly IBinanceRepository _binanceRepository;
+        private readonly IBinanceApiFacade _binanceApiFacade;
 
-        public SymbolsController(IBinanceRepository binanceRepository)
+        public SymbolsController(IBinanceApiFacade binanceApiFacade)
         {
-            _binanceRepository = binanceRepository;
+            _binanceApiFacade = binanceApiFacade;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@
         [HttpGet]
         public async Task<GetSymbolsResponse> GetSymbols()
         {
-            var symbolsResponse = await _binanceRepository.GetSymbols();
+            var symbolsResponse = await _binanceApiFacade.GetSymbols();
 
             var response = new GetSymbolsResponse()
             {

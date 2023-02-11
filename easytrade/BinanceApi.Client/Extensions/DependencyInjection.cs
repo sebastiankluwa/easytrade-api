@@ -1,11 +1,11 @@
-﻿namespace Easytrade.Api.Binance.Logic.Extensions
-{
-    using CryptoExchange.Net.Authentication;
-    using global::Binance.Net;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
+﻿using Binance.Net;
+using CryptoExchange.Net.Authentication;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
+namespace BinanceApi.Client.Extensions
+{
     public static class DependencyInjection
     {
         public static IServiceCollection AddBinanceServices(this IServiceCollection services, IConfiguration configuration)
