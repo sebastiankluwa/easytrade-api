@@ -1,7 +1,6 @@
 ﻿namespace Easytrade.Logic.Services.Strategies.Orders.PlaceOrder
 {
     using AutoMapper;
-    using Binance.Net.Objects.Models.Spot;
     using BinanceApi.Client;
     using Easytrade.Contract.Dto.Orders;
     using Easytrade.Contract.Requests.Orders;
@@ -17,6 +16,8 @@
         private readonly IBuyOrderRepository _buyOrderRepository;
         private readonly IMapper _mapper;
 
+        private Bot _bot = null!;
+
         public PlaceOrderBuyStrategy(IBotRepository botRepository,
             IBinanceApiFacade binanceApiFacade,
             IBuyOrderRepository buyOrderRepository,
@@ -29,55 +30,40 @@
 
         public override async Task<OrderDto> PlaceOrder(long botId, PlaceOrderRequest request)
         {
-            var bot = await _botRepository.GetBotByIdAsync(botId);
-            var quantity = bot.MinimumAllocation;
+            _bot = await _botRepository.GetBotByIdAsync(botId);
 
-            await Validate(bot);
+            await Validate();
 
-            var binanceOrder = await PlaceBinanceOrder(request, quantity);
-
-            var buyOrder = await CreateBuyOrder(botId, binanceOrder, request);
+            var buyOrder = await CreateBuyOrder(botId, request);
 
             var response = _mapper.Map<OrderDto>(buyOrder);
 
             return response;
         }
 
-        private async Task<BuyOrder> CreateBuyOrder(long botId, BinancePlacedOrder binanceOrder, PlaceOrderRequest request)
+        private async Task<BuyOrder> CreateBuyOrder(long botId, PlaceOrderRequest request)
         {
-            var buyOrder = MapBuyOrder(botId, binanceOrder, request);
+            var buyQuantity = GetOrderQuantity();
+
+            var binanceOrder = await PlaceBinanceOrder(request, buyQuantity);
+
+            BuyOrder buyOrder = _mapper.Map<BuyOrder>(MapOrder(botId, binanceOrder, request));
 
             await _buyOrderRepository.CreateOrderAsync(buyOrder);
 
             return buyOrder;
         }
 
-        private static BuyOrder MapBuyOrder(long botId, BinancePlacedOrder binanceOrder, PlaceOrderRequest request)
+        private async Task Validate()
         {
-            var buyOrder = new BuyOrder
+            var openBuyOrdersCount = await _buyOrderRepository.CountAllOpenBuyOrdersForBot(_bot.Id);
+
+            if (openBuyOrdersCount >= _bot.MaxOpenPositions)
             {
-                BotId = botId,
-                ReferenceOrderId = binanceOrder.OriginalClientOrderId,
-                Side = request.Side.ToString(),
-                OrderDate = binanceOrder.CreateTime,
-                Amount = binanceOrder.Quantity,
-                Pair = request.Pair,
-                Rate = binanceOrder.AverageFillPrice ?? binanceOrder.Price,
-                Status = GetOrderStatus(binanceOrder),
-                Fee = binanceOrder.Trades?.Select(p => p.Fee).Sum()
-            };
-
-            return buyOrder;
-        }
-
-        private async Task Validate(Bot bot)
-        {
-            var openBuyOrdersCount = await _buyOrderRepository.CountAllOpenBuyOrdersForBot(bot.Id);
-
-            if (openBuyOrdersCount >= bot.MaxOpenPositions)
-            {
-                throw new InvalidOperationException($"Limit reached for the number of open orders: {bot.MaxOpenPositions}!");
+                throw new InvalidOperationException($"Limit reached for the number of open orders: {_bot.MaxOpenPositions}!");
             }
         }
+
+        private decimal GetOrderQuantity() => _bot.MinimumAllocation;
     }
 }

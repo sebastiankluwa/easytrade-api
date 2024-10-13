@@ -75,5 +75,15 @@
 
             return updatedOrder;
         }
+
+        public async Task<IEnumerable<SellOrder>> GetAllOpenOrdersAsync(long botId)
+        {
+            var sellOrders = await _dbContext.SellOrders
+                .AsNoTracking()
+                .Where(s => s.BotId == botId && s.Status == OrderStatus.Pending)
+                .ToListAsync();
+
+            return sellOrders;
+        }
     }
 }

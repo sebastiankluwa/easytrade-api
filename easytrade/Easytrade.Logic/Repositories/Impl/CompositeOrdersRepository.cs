@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using Easytrade.Contract.Dto.Orders;
+    using Easytrade.Model.Domain.Bots;
     using Easytrade.Model.Repositories.Impl;
     using System.Collections.Generic;
     using System.Linq;
@@ -21,31 +22,35 @@
             _mapper = mapper;
         }
 
+        public async Task<OrderDto> GetOrder(long orderId)
+        {
+            var buyOrder = await _buyOrderRepository.GetOrderByIdAsync(orderId);
+            var sellOrder = await _sellOrderRepository.GetOrderByIdAsync(orderId);
+
+            return sellOrder != null 
+                ? _mapper.Map<OrderDto>(sellOrder) 
+                : _mapper.Map<OrderDto>(buyOrder);
+        }
+
         public async Task<IEnumerable<OrderDto>> GetAllOrdersByBotId(long botId)
         {
-            var tasks = new[] { GetBuyOrders(botId), GetSellOrders(botId) };
-
-            var tasksResult = await Task.WhenAll(tasks);
-
-            var result = tasksResult
-                .SelectMany(tr => tr)
-                .ToList();
-
-            return result;
-        }
-
-        private async Task<IEnumerable<OrderDto>> GetBuyOrders(long botId)
-        {
             var buyOrders = await _buyOrderRepository.GetAllOrdersByBotIdAsync(botId);
-
-            return _mapper.Map<IEnumerable<OrderDto>>(buyOrders);
-        }
-
-        private async Task<IEnumerable<OrderDto>> GetSellOrders(long botId)
-        {
             var sellOrders = await _sellOrderRepository.GetAllOrdersByBotIdAsync(botId);
 
-            return _mapper.Map<IEnumerable<OrderDto>>(sellOrders);
+            var concatenatedOrders = buyOrders.Concat<Order>(sellOrders)
+                .OrderByDescending(o => o.OrderDate);
+
+            return _mapper.Map<IEnumerable<OrderDto>>(concatenatedOrders);
+        }
+
+        public async Task<IEnumerable<OrderDto>> GetAllOpenOrdersByBotId(long botId)
+        {
+            var buyOpenOrders = await _buyOrderRepository.GetAllOpenOrdersAsync(botId);
+            var sellOpenOrders = await _sellOrderRepository.GetAllOpenOrdersAsync(botId);
+
+            var concatenatedOrders = buyOpenOrders.Concat<Order>(sellOpenOrders);
+
+            return _mapper.Map<IEnumerable<OrderDto>>(concatenatedOrders);
         }
     }
 }

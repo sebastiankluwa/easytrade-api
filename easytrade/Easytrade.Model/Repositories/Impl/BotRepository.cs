@@ -20,6 +20,10 @@
         public async Task<IEnumerable<Bot>> GetAllBotsAsync()
         {
             var bots = await _dbContext.Bots
+                .Include(b => b.SellOrders)
+                    .ThenInclude(b => b.ProfitLoss)
+                .Include(b => b.BuyOrders)
+                    .ThenInclude(b => b.ProfitLoss)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -29,6 +33,11 @@
         public async Task<Bot> GetBotByIdAsync(long botId)
         {
             var bot = await _dbContext.Bots
+                .Include(b => b.SellOrders)
+                .ThenInclude(b => b.ProfitLoss)
+                .Include(b => b.BuyOrders)
+                .ThenInclude(b => b.ProfitLoss)
+                .IgnoreAutoIncludes()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(b => b.Id == botId);
 

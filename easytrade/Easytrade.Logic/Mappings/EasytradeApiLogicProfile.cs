@@ -10,13 +10,28 @@
     {
         public EasytradeApiLogicProfile()
         {
-            CreateMap<BotDto, Bot>().ReverseMap();
             CreateMap<CreateBotRequest, Bot>();
             CreateMap<UpdateBotRequest, Bot>();
 
+            CreateMap<Bot, BotDto>()
+                .ForMember(dest => dest.Orders,
+                    opt => opt.MapFrom(src => MapOrders(src)));
+
+            CreateMap<ProfitLoss, ProfitLossDto>().ReverseMap();
+
+            CreateMap<Order, BuyOrder>();
+            CreateMap<Order, SellOrder>();
             CreateMap<BuyOrder, OrderDto>().ReverseMap();
             CreateMap<SellOrder, OrderDto>().ReverseMap();
+            CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<OrderStatus, OrderStatusDto>().ReverseMap();
+        }
+
+        private IEnumerable<Order> MapOrders(Bot bot)
+        {
+            return bot.SellOrders.Concat<Order>(bot.BuyOrders)
+                .OrderByDescending(o => o.OrderDate)
+                .ToList();
         }
     }
 }

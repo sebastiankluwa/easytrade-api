@@ -13,5 +13,7 @@ namespace BinanceApi.Client
             decimal quantity, 
             decimal price,
             SpotOrderType orderType = SpotOrderType.Limit);
+
+        Task<bool> CancelOrder(long orderId);
     }
 }

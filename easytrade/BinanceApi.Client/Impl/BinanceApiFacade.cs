@@ -46,6 +46,19 @@
             return callResult.Data;
         }
 
+        public async Task<bool> CancelOrder(long orderId)
+        {
+            var callResult = await _binanceClient.SpotApi.Trading.CancelOrderAsync("BTCUSDT", orderId);
+
+            if (!callResult.Success)
+            {
+                throw new InvalidOperationException(
+                    $"Occur errors during call Binance API. Error code: {callResult.Error?.Code}. Details: {callResult.Error?.Message}");
+            }
+
+            return true;
+        }
+
         public async Task<IEnumerable<SymbolDto>> GetSymbols()
         {
             var getSymbolsTask = _binanceClient.SpotApi.ExchangeData.GetMarginSymbolsAsync();

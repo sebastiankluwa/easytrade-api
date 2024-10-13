@@ -15,7 +15,7 @@
         public bool IsActive { get; set; }
 
         [Required, MinLength(1)]
-        public List<string> Symbols { get; set; }
+        public string[] Symbols { get; set; }
 
         [Range(1,20)]
         public int MaxOpenPositions { get; set; }

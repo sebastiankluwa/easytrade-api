@@ -18,6 +18,9 @@
         private readonly IBotRepository _botRepository;
         private readonly IMapper _mapper;
 
+        private BuyOrder? _relatedBuyOrder;
+        private BinancePlacedOrder _binanceOrder = null!;
+
         public PlaceOrderSellStrategy(IBinanceApiFacade binanceApiFacade,
             ISellOrderRepository sellOrderRepository,
             IBuyOrderRepository buyOrderRepository,
@@ -32,71 +35,49 @@
 
         public override async Task<OrderDto> PlaceOrder(long botId, PlaceOrderRequest request)
         {
-            var relatedBuyOrder = await _buyOrderRepository.GetOldestUnmatchedBuyOrderForBot(botId);
-
-            var sellQuantity = await GetOrderQuantity(botId, relatedBuyOrder);
-            var binanceOrder = await PlaceBinanceOrder(request, sellQuantity);
-
-            var sellOrder = await CreateSellOrder(botId, binanceOrder, request, relatedBuyOrder);
+            _relatedBuyOrder = await _buyOrderRepository.GetOldestUnmatchedBuyOrderForBot(botId);
+            
+            var sellOrder = await CreateSellOrder(botId, request);
 
             var response = _mapper.Map<OrderDto>(sellOrder);
 
             return response;
         }
-
-        private async Task<decimal> GetOrderQuantity(long botId, BuyOrder? relatedBuyOrder)
+        private async Task<SellOrder> CreateSellOrder(long botId, PlaceOrderRequest request)
         {
-            if (relatedBuyOrder != null)
-            {
-                return relatedBuyOrder.Amount;
-            }
+            var sellQuantity = await GetOrderQuantity(botId);
 
-            var bot = await _botRepository.GetBotByIdAsync(botId);
+            _binanceOrder = await PlaceBinanceOrder(request, sellQuantity);
 
-            return bot.MinimumAllocation;
-        }
-
-        private async Task<SellOrder> CreateSellOrder(long botId, BinancePlacedOrder binanceOrder, PlaceOrderRequest request, BuyOrder relatedBuyOrder)
-        {
-            var sellOrder = MapSellOrder(botId, binanceOrder, request, relatedBuyOrder);
+            var sellOrder = _mapper.Map<SellOrder>(MapOrder(botId, _binanceOrder, request));
 
             await _sellOrderRepository.CreateOrderAsync(sellOrder);
 
             return sellOrder;
         }
 
-        private static SellOrder MapSellOrder(long botId, BinancePlacedOrder placedOrder, PlaceOrderRequest request, BuyOrder relatedBuyOrder)
+        private async Task<decimal> GetOrderQuantity(long botId)
         {
-            var sellOrder = new SellOrder
-            {
-                BotId = botId,
-                ReferenceOrderId = placedOrder.OriginalClientOrderId,
-                Side = request.Side.ToString(),
-                OrderDate = placedOrder.CreateTime,
-                Amount = placedOrder.Quantity,
-                Pair = request.Pair,
-                Rate = placedOrder.AverageFillPrice ?? placedOrder.Price,
-                Status = GetOrderStatus(placedOrder),
-                Fee = placedOrder.Trades?.Select(p => p.Fee).Sum(),
-                ProfitLoss = relatedBuyOrder.Status == OrderStatus.Filled
-                    ? MapProfitLoss(placedOrder, relatedBuyOrder)
-                    : null
-            };
-
-            return sellOrder;
+            return _relatedBuyOrder?.Amount ?? (await _botRepository.GetBotByIdAsync(botId)).MinimumAllocation;
         }
 
-        private static ProfitLoss MapProfitLoss(BinancePlacedOrder placedOrder, BuyOrder relatedBuyOrder)
+        private ProfitLoss MapProfitLoss()
         {
             var profitLoss = new ProfitLoss
             {
-                BuyOrderId = relatedBuyOrder.Id,
-                CompletionDate = placedOrder.UpdateTime ?? DateTime.Now,
-                Result = relatedBuyOrder.Total -
-                         placedOrder.Quantity * (placedOrder.AverageFillPrice ?? placedOrder.Price)
+                BuyOrderId = _relatedBuyOrder!.Id,
+                CompletionDate = _binanceOrder.UpdateTime ?? DateTime.Now,
+                Result = _relatedBuyOrder.Total -
+                         _binanceOrder.Quantity * (_binanceOrder.AverageFillPrice ?? _binanceOrder.Price)
             };
 
             return profitLoss;
+        }
+
+        protected override void ApplyOrderMappings(Order order)
+        {
+            base.ApplyOrderMappings(order);
+            order.ProfitLoss = _relatedBuyOrder?.Status == OrderStatus.Filled ? MapProfitLoss() : null;
         }
     }
 }
