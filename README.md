@@ -22,7 +22,7 @@ dotnet ef migrations add InitialCreate --context EasyTradeDbContext -s ..\Easytr
 ```
 
 
-- The **-s** parameter indicates the startup project with connection string  `-s ..\DataMatrix.Api\DataMatrix.Api.csproj`
+- The **-s** parameter indicates the startup project with connection string  `-s ..\Easytrade.Api\Easytrade.Api.csproj`
 
 
 **Update DB from command line**
