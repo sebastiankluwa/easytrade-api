@@ -1,0 +1,105 @@
+{
+	"Id": 1,
+	"Name": "MACD Bot",
+	"Allocation": 100000.0,
+	"TotalProfit": 12000.0,
+	"DayProfit": 0.0,
+	"IsActive": true,
+	"Symbols": [
+		"BTCUSDT"
+	],
+	"MaxOpenPositions": 5,
+	"MinimumAllocation": 10.0,
+	"BuyOrders": [
+		{
+			"Id": 1,
+			"BotId": 1,
+			"ProfitLossId": 1,
+			"ProfitLoss": {
+				"Id": 1,
+				"BuyOrderId": 1,
+				"SellOrderId": 1,
+				"Result": 10000.0,
+				"CompletionDate": "2022-12-02T13:01:01Z",
+				"SellOrder": null
+			},
+			"ReferenceOrderId": 1,
+			"Side": "Buy",
+			"OrderDate": "2022-12-01T13:01:01Z",
+			"Amount": 10.0,
+			"Fee": 0.5,
+			"Pair": "BTCUSDT",
+			"Rate": 10000.0,
+			"Total": 100000.0,
+			"Status": 1
+		},
+		{
+			"Id": 2,
+			"BotId": 1,
+			"ProfitLossId": 2,
+			"ProfitLoss": {
+				"Id": 2,
+				"BuyOrderId": 2,
+				"SellOrderId": 2,
+				"Result": 2000.0,
+				"CompletionDate": "2022-12-04T13:01:01Z",
+				"SellOrder": null
+			},
+			"ReferenceOrderId": 2,
+			"Side": "Buy",
+			"OrderDate": "2022-12-03T13:01:01Z",
+			"Amount": 20.0,
+			"Fee": 1.0,
+			"Pair": "BTCUSDT",
+			"Rate": 1000.0,
+			"Total": 20000.0,
+			"Status": 1
+		}
+	],
+	"SellOrders": [
+		{
+			"Id": 1,
+			"BotId": 1,
+			"ProfitLossId": 1,
+			"ProfitLoss": {
+				"Id": 1,
+				"BuyOrderId": 1,
+				"SellOrderId": 1,
+				"Result": 10000.0,
+				"CompletionDate": "2022-12-02T13:01:01Z",
+				"BuyOrder": null
+			},
+			"ReferenceOrderId": 1,
+			"Side": "Sell",
+			"OrderDate": "2022-12-02T13:01:01Z",
+			"Amount": 10.0,
+			"Fee": 0.5,
+			"Pair": "BTCUSDT",
+			"Rate": 11000.0,
+			"Total": 110000.0,
+			"Status": 1
+		},
+		{
+			"Id": 2,
+			"BotId": 1,
+			"ProfitLossId": 2,
+			"ProfitLoss": {
+				"Id": 2,
+				"BuyOrderId": 2,
+				"SellOrderId": 2,
+				"Result": 2000.0,
+				"CompletionDate": "2022-12-04T13:01:01Z",
+				"BuyOrder": null
+			},
+			"ReferenceOrderId": 2,
+			"Side": "Sell",
+			"OrderDate": "2022-12-04T13:01:01Z",
+			"Amount": 20.0,
+			"Fee": 1.0,
+			"Pair": "BTCUSDT",
+			"Rate": 1100.0,
+			"Total": 22000.0,
+			"Status": 1
+		}
+	]
+}
