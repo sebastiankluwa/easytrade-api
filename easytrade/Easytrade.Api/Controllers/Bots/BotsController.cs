@@ -7,6 +7,7 @@
     using Easytrade.Model.Domain.Bots;
     using Easytrade.Model.Repositories;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Annotations;
     using System.Net;
     using System.Threading.Tasks;

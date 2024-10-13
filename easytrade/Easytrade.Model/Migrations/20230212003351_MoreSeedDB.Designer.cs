@@ -3,6 +3,7 @@ using System;
 using Easytrade.Model.DbAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Easytrade.Model.Migrations
 {
     [DbContext(typeof(EasyTradeDbContext))]
-    partial class EasyTradeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230212003351_MoreSeedDB")]
+    partial class MoreSeedDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,26 +69,26 @@ namespace Easytrade.Model.Migrations
                         new
                         {
                             Id = 1L,
-                            Allocation = 100000m,
+                            Allocation = 1000m,
                             DayProfit = 0m,
                             IsActive = true,
                             MaxOpenPositions = 5,
                             MinimumAllocation = 10m,
                             Name = "MACD Bot",
                             Symbols = new[] { "BTCUSDT" },
-                            TotalProfit = 12000m
+                            TotalProfit = 10000m
                         },
                         new
                         {
                             Id = 2L,
-                            Allocation = 15000m,
+                            Allocation = 2000m,
                             DayProfit = 0m,
                             IsActive = true,
                             MaxOpenPositions = 2,
                             MinimumAllocation = 5m,
                             Name = "RSI Bot",
                             Symbols = new[] { "ETHUSDT" },
-                            TotalProfit = 3000m
+                            TotalProfit = 0m
                         },
                         new
                         {
@@ -241,7 +243,6 @@ namespace Easytrade.Model.Migrations
                         {
                             Id = 1L,
                             BuyOrderId = 1L,
-                            CompletionDate = new DateTime(2022, 12, 2, 13, 1, 1, 0, DateTimeKind.Utc),
                             Result = 10000m,
                             SellOrderId = 1L
                         },
@@ -249,7 +250,6 @@ namespace Easytrade.Model.Migrations
                         {
                             Id = 2L,
                             BuyOrderId = 2L,
-                            CompletionDate = new DateTime(2022, 12, 4, 13, 1, 1, 0, DateTimeKind.Utc),
                             Result = 2000m,
                             SellOrderId = 2L
                         },
@@ -257,7 +257,6 @@ namespace Easytrade.Model.Migrations
                         {
                             Id = 3L,
                             BuyOrderId = 3L,
-                            CompletionDate = new DateTime(2022, 12, 6, 13, 1, 1, 0, DateTimeKind.Utc),
                             Result = 3000m,
                             SellOrderId = 3L
                         });
@@ -342,7 +341,7 @@ namespace Easytrade.Model.Migrations
                         {
                             Id = 3L,
                             Amount = 30m,
-                            BotId = 2L,
+                            BotId = 3L,
                             Fee = 2m,
                             OrderDate = new DateTime(2022, 12, 6, 13, 1, 1, 0, DateTimeKind.Utc),
                             Pair = "ETHUSDT",

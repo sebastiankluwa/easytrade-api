@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiClients", "ApiClients", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinanceApi.Client", "easytrade\BinanceApi.Client\BinanceApi.Client.csproj", "{7954D8B6-8B43-4613-945C-5600C4E1D31A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easytrade.Api.IntegrationTests", "easytrade\Easytrade.Api.IntegrationTests\Easytrade.Api.IntegrationTests.csproj", "{18AB2E69-6378-4A19-AF7B-A1D4CA35080C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Easytrade.UnitTests", "easytrade\Easytrade.UnitTests\Easytrade.UnitTests.csproj", "{A0CB80EC-A36F-45F1-84A4-C557DF328682}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{7954D8B6-8B43-4613-945C-5600C4E1D31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7954D8B6-8B43-4613-945C-5600C4E1D31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7954D8B6-8B43-4613-945C-5600C4E1D31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18AB2E69-6378-4A19-AF7B-A1D4CA35080C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18AB2E69-6378-4A19-AF7B-A1D4CA35080C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18AB2E69-6378-4A19-AF7B-A1D4CA35080C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18AB2E69-6378-4A19-AF7B-A1D4CA35080C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CB80EC-A36F-45F1-84A4-C557DF328682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CB80EC-A36F-45F1-84A4-C557DF328682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CB80EC-A36F-45F1-84A4-C557DF328682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CB80EC-A36F-45F1-84A4-C557DF328682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

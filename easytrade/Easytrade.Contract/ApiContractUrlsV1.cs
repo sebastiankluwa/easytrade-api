@@ -13,5 +13,7 @@
         public const string Bots = InternalApiVersion + "/bots";
 
         public const string PublicOrders = PublicApiVersion + "/{botId}/orders";
+
+        public const string Orders = InternalApiVersion + "/{botId}/orders";
     }
 }

@@ -7,5 +7,7 @@
     public interface ICompositeOrdersRepository
     {
         Task<IEnumerable<OrderDto>> GetAllOrdersByBotId(long botId);
+        Task<OrderDto> GetOrder(long orderId);
+        Task<IEnumerable<OrderDto>> GetAllOpenOrdersByBotId(long botId);
     }
 }

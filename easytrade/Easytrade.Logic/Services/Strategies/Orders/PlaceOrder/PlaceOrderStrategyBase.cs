@@ -29,6 +29,31 @@
             return placedOrder;
         }
 
+        protected Order MapOrder(long botId, BinancePlacedOrder binanceOrder, PlaceOrderRequest request)
+        {
+            var order = new Order
+            {
+                BotId = botId,
+                ReferenceOrderId = binanceOrder.Id,
+                Side = request.Side.ToString(),
+                OrderDate = binanceOrder.CreateTime,
+                Amount = binanceOrder.Quantity,
+                Pair = request.Pair,
+                Rate = binanceOrder.AverageFillPrice ?? binanceOrder.Price,
+                Status = GetOrderStatus(binanceOrder),
+                Fee = binanceOrder.Trades?.Select(p => p.Fee).Sum()
+            };
+
+            ApplyOrderMappings(order);
+
+            return order;
+        }
+
+        protected virtual void ApplyOrderMappings(Order order)
+        {
+
+        }
+
         protected static OrderStatus GetOrderStatus(BinancePlacedOrder binanceOrder)
         {
             if (!Enum.TryParse<OrderStatus>(binanceOrder.Status.ToString(), true, out var orderStatus))

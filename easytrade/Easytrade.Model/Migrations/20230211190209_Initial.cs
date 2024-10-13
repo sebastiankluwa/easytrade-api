@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Easytrade.Model.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,10 +43,10 @@ namespace Easytrade.Model.Migrations
                     Side = table.Column<string>(type: "text", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Fee = table.Column<decimal>(type: "numeric", nullable: false),
+                    Fee = table.Column<decimal>(type: "numeric", nullable: true),
                     Pair = table.Column<string>(type: "text", nullable: false),
                     Rate = table.Column<decimal>(type: "numeric", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: true)
+                    Status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,10 +71,10 @@ namespace Easytrade.Model.Migrations
                     Side = table.Column<string>(type: "text", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    Fee = table.Column<decimal>(type: "numeric", nullable: false),
+                    Fee = table.Column<decimal>(type: "numeric", nullable: true),
                     Pair = table.Column<string>(type: "text", nullable: false),
                     Rate = table.Column<decimal>(type: "numeric", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: true)
+                    Status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -40,5 +40,7 @@
         public decimal Total { get; set; }
 
         public OrderStatusDto Status { get; set; }
+
+        public ProfitLossDto ProfitLoss { get; set; }
     }
 }

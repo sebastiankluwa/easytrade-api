@@ -10,7 +10,7 @@
         Canceled = 2
     }
 
-    public abstract class Order
+    public class Order
     {
         public long Id { get; set; }
 
@@ -23,7 +23,7 @@
         public ProfitLoss ProfitLoss { get; set; }
 
         [Required]
-        public string ReferenceOrderId { get; set; }
+        public long ReferenceOrderId { get; set; }
 
         [Required]
         public string Side { get; set; }
